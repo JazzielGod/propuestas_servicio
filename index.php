@@ -19,6 +19,9 @@
     <p>El id es: <?php echo $id ?> </p>
 
 <!--
+
+    Sin terminar estado de pruebas
+
     <h2>Formulario para word (Sin terminar)</h2>
 
    <form action="/propuestas_servicio/phpword/template.php" method="post">

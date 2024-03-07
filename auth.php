@@ -1,10 +1,20 @@
 <?php
     session_start();
-    include 'conexion_db.php';
-
     if (isset($_POST['email']) && isset($_POST['password'])) {
-        $email_sesion = $_POST['email'];
-        $password_sesion = $_POST['password'];
+
+        include 'conexion_db.php';
+        $conn = mysqli_connect($db_host, $db_user, $db_pass);
+
+        $email_sesion = mysqli_real_escape_string($conn, $_POST['email']);
+        $password_sesion = mysqli_real_escape_string($conn, $_POST['password']);
+
+        if (!$conn) {
+            die("Error de conexión: " . mysqli_connect_error());
+        }
+
+        mysqli_select_db($conn, $db_name) or die("No se encuentra la BBDD");
+
+        mysqli_set_charset($conn, "utf8");
 
         // Obtener la contraseña almacenada en la base de datos
         $sql = "SELECT password FROM USUARIOS WHERE email = '$email_sesion'";
